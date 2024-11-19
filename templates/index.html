@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://kit.fontawesome.com/b42de8c18d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<header class="header">
+    <div class="header_wrapper">
+        <h1 class="p_name">Giorgi Karchiladze</h1>
+        <img src="{{ url_for('photos_directory', filename='IMG_6964.jpg') }}" alt="my_photo" class="my_photo">
+        <div class="icons">
+            <div class="icon_and_text">
+                <span class="icon_text">Tbilisi, GE</span>
+                <i class="fa-solid fa-house icon"></i>
+            </div>
+            <div class="icon_and_text">
+                <span class="icon_text" >+995-591-193-112</span>
+                <i class="fa-solid fa-phone icon"></i>
+            </div>
+            <div class="icon_and_text">
+                <span class="icon_text">giorgikarchiladze5@gmail.com</span>
+                <i class="fa-solid fa-envelope icon"></i>
+            </div>
+            <div class="icon_and_text">
+                <span class="icon_text"><a href="https://www.linkedin.com/in/giorgi-qarchiladze-17b891296/" target="_blank" id="linkedinText">Linkedin Profile</a></span>
+                <i class="fa-brands fa-linkedin icon"></i>
+            </div>
+            <div class="icon_and_text">
+                <span class="icon_text"><a href="https://github.com/GiorgiKarchiladze" target="_blank" id="githubText">Github Profile</a></span>
+                <i class="fa-brands fa-square-github"></i>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+
+    <div class="education">
+        <h1 class="education_header">My Education</h1>
+        {% for skill in skills %}
+        <div class="skill">
+            <h1 class="skill_header">{{ skill[1] }}</h1>
+            {% if skill[2] %}
+                <img src="{{ url_for('img', skill_id=skill[0]) }}" alt="Skill Image" class="skill_img">
+            {% endif %}
+            <p class="skill_desc">{{ skill[3] }}</p>
+            {% if skill[4] %}
+                <img src="{{ url_for('certification', skill_id=skill[0]) }}" alt="Skill Certification" class="skill_cert">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="projects">
+        <h1 class="project_header">My Projects</h1>
+        {% for project in projects %}
+        <div class="project">
+            <h1>
+                {{ project[1] }}
+                <a href="{{ project[2] }}" target="_blank">
+                    <i class="fa-brands fa-github github_icon"></i>
+                </a>
+            </h1>
+            <p class="project_desc">{{ project[3] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+<footer class="footer">
+
+</footer>
+</body>
+<script>
+    skillDescs = document.querySelectorAll(".skill_desc")
+    skillCerts = document.querySelectorAll(".skill_cert")
+    skillHeads = document.querySelectorAll(".skill_header")
+    iconTexts = document.querySelectorAll(".icons .icon_and_text span")
+    githubIcons = document.querySelectorAll(".github_icon")
+    skills = document.querySelectorAll(".skill")
+
+    //Copy the phone number/email
+    iconTexts.forEach((element, index) => {
+        if (index === 1 || index === 2) {
+            element.addEventListener('click', () => {
+                var tempInput = document.createElement("textarea");
+                tempInput.value = element.innerText;
+                document.body.appendChild(tempInput);
+
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999);
+
+                navigator.clipboard.writeText(tempInput.value);
+
+                document.body.removeChild(tempInput);
+            });
+        }
+    });
+
+    //Show the 'Click to copy' inside the header tooltip
+    function toggleHeaderTooltip(event) {
+        let header_tooltip = document.querySelector('.header_tooltip');
+        if (!header_tooltip) {
+            header_tooltip = document.createElement('div');
+            header_tooltip.className = 'header_tooltip';
+            header_tooltip.innerText = 'Click to copy';
+            document.body.appendChild(header_tooltip);
+        }
+
+        if (event.type === 'mouseenter') {
+            iconTexts[2].style.cursor = 'pointer';
+            iconTexts[1].style.cursor = 'pointer';
+            header_tooltip.style.left = `${event.target.getBoundingClientRect().right + 3}px`;
+            header_tooltip.style.top = `${event.target.getBoundingClientRect().top + 5}px`;
+            header_tooltip.classList.add('show');
+        } else if (event.type === 'mouseleave') {
+            iconTexts[2].style.cursor = '';
+            iconTexts[1].style.cursor = '';
+            header_tooltip.classList.remove('show');
+        }
+    }
+    
+    //Change color on hover
+    function toggleColor(event) {
+        if (event.type === 'mouseenter') {
+            event.target.style.color = 'black';
+        } else if (event.type === 'mouseleave') {
+            event.target.style.color = '';
+        }
+    }
+
+
+    document.querySelector("#linkedinText").addEventListener('mouseenter', toggleColor);
+    document.querySelector("#linkedinText").addEventListener('mouseleave', toggleColor);
+    document.querySelector("#githubText").addEventListener('mouseenter', toggleColor);
+    document.querySelector("#githubText").addEventListener('mouseleave', toggleColor);
+
+    iconTexts[2].addEventListener('mouseenter', toggleHeaderTooltip)
+    iconTexts[2].addEventListener('mouseleave', toggleHeaderTooltip)
+    iconTexts[1].addEventListener('mouseenter', toggleHeaderTooltip)
+    iconTexts[1].addEventListener('mouseleave', toggleHeaderTooltip)
+
+
+    //Show and hide the description and certification of a respective skill
+    skillHeads.forEach((skillHead, index) => {
+        skillHead.addEventListener("click", function (){
+            skillDescs[index].classList.add("show")
+            skillCerts[index].classList.add("show")
+        })
+    })
+
+    skills.forEach((skill, index) => {
+        skill.addEventListener("mouseleave", function (){
+            skillDescs[index].classList.remove("show")
+            skillCerts[index].classList.remove("show")
+        })
+
+    })
+
+</script>
+</html>

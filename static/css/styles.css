@@ -1,0 +1,186 @@
+/*margin, padding: 0*/
+body, h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+}
+
+/*display: flex*/
+.header, .header_wrapper, .icons, .icon, .icon_and_text, .education, .skill, .skill_desc{
+    display: flex;
+}
+
+/*justify-content: center*/
+.header, .header_wrapper{
+    justify-content: center;
+}
+
+/*align-items: flex-start*/
+.icons{
+    align-items: flex-end;
+}
+
+/*align-items: center*/
+.icon_and_text{
+    align-items: center;
+}
+
+/*flex-direction: column*/
+.icons{
+    flex-direction: column;
+}
+
+/* display: none */
+.skill_cert, .skill_desc{
+    display: none;
+}
+
+/* display: block */
+.skill_desc.show, .skill_cert.show{
+    display: block;
+}
+
+/* header */
+.my_photo, .header_wrapper h1, .icons{
+    position: absolute;
+}
+
+.header{
+    height: 180px;
+}
+
+.header_wrapper{
+    position: relative;
+    margin-top: 15px;
+    align-items: center;
+    background: linear-gradient(to right, black, gray);
+    height: 100%;
+    width: 80%;
+    border-radius: 30px;
+}
+
+.header_wrapper h1{
+    font-weight: 300;
+    left: 60px;
+    top:auto;
+    font-size: 30px;
+    color: whitesmoke;
+}
+
+.my_photo {
+    clip-path: circle();
+    height: 150px;
+    width: 150px;
+    
+}
+
+.icons{
+    right: 20px;
+    gap: 15px;
+    color: white;
+    transform: scale(0.9);
+}
+
+.icon_text{
+    margin-right: 15px;
+    font-weight: 400;
+}
+
+.icon_and_text:nth-of-type(4) a, .icon_and_text:nth-of-type(5) a{
+    color: white;
+    text-decoration: none;
+}
+
+.header_tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 6px;
+    border-radius:12px;
+    font-size: 15px; 
+    visibility: hidden;
+    z-index: 1000;
+    transition: opacity 0.2s;
+    opacity: 0;
+    max-width: 200px; 
+    word-wrap: break-word; 
+}
+
+.header_tooltip.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* main */
+
+
+
+/* projects */
+
+.projects a i{
+    font-size: 35px;
+}
+
+/* education */
+
+.education {
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.education_header{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.skill {
+    background: linear-gradient(forestgreen, lawngreen);
+    padding: 0.5%;
+    border-radius: 15px;
+    max-width: 24%;
+    flex: 0 0 48%;
+    margin: 2% 4% 2% 4%;
+    box-sizing: border-box;
+    position: relative;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.skill h1 {
+    width: 100%;
+    color: white;
+}
+
+.skill_img{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 5px;
+    right: 5px;
+}
+
+.skill_desc {
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: white;
+}
+
+/* projects */
+.project_header{
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+

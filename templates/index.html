@@ -75,6 +75,11 @@
 </footer>
 </body>
 <script>
+    fetch('http://13.51.171.236:5000/api/endpoint')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+
     skillDescs = document.querySelectorAll(".skill_desc")
     skillCerts = document.querySelectorAll(".skill_cert")
     skillHeads = document.querySelectorAll(".skill_header")
